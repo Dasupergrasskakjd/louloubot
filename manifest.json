@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "LoulouBot",
+  "version": "1.0.0",
+  "description": "LoulouBot for Wolvesville",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.wolvesville.com/*"],
+      "js": ["inject.js", "content.js", "content-script.js"],
+      "run_at": "document_start"
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "lib/jquery.js",
+        "lib/socketio-client.js",
+        "lib/bot-logic.js",
+        "lib/settimeout-hook.js",
+        "lib/replayer.js",
+        "inject.js"
+      ],
+      "matches": ["*://*.wolvesville.com/*"]
+    }
+  ],
+
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+
+  "permissions": ["storage", "scripting", "debugger", "tabs"],
+
+  "host_permissions": ["*://*.wolvesville.com/*"],
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_popup": "popup/popup.html",
+    "default_title": "LoulouBot"
+  }
+}

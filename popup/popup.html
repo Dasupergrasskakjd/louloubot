@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LoulouBot</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <!-- Top Bar -->
+    <div class="topbar">
+      <button class="menu-btn" id="menuBtn">☰</button>
+      <div class="topbar-title">LoulouBot</div>
+      <div class="topbar-status" id="topbarStatus"></div>
+      <button id="messagesBtn" class="messages-btn" title="Messages">
+        📩<span id="messagesBadge" class="messages-badge hidden">1</span>
+      </button>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">⚡</div>
+        <div class="sidebar-title">LoulouBot</div>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-page="overview">
+          <span class="nav-icon">🏠</span>
+          <span class="nav-label">Overview</span>
+        </button>
+        <button class="nav-item" data-page="xp">
+          <span class="nav-icon">🧪</span>
+          <span class="nav-label">XP</span>
+        </button>
+        <button class="nav-item" data-page="misc">
+          <span class="nav-icon">🎲</span>
+          <span class="nav-label">Misc</span>
+        </button>
+        <button class="nav-item" data-page="options">
+          <span class="nav-icon">⚙️</span>
+          <span class="nav-label">Options</span>
+        </button>
+        <button class="nav-item" data-page="support">
+          <span class="nav-icon">🆘</span>
+          <span class="nav-label">Support</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Overview Page -->
+      <div class="page active" id="page-overview">
+        <div class="welcome-section">
+          <h1 class="welcome-title" id="welcomeTitle">Welcome</h1>
+          <div class="user-info">
+            <div class="info-item">
+              <span class="info-label">Level</span>
+              <span class="info-value" id="userLevel">—</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">License</span>
+              <span class="info-value license-status" id="licenseStatus"
+                >—</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-cards">
+          <button class="nav-card" data-page="xp">
+            <div class="card-icon">🧪</div>
+            <div class="card-title">XP</div>
+          </button>
+          <button class="nav-card" data-page="misc">
+            <div class="card-icon">🎲</div>
+            <div class="card-title">Misc</div>
+          </button>
+          <button class="nav-card" data-page="options">
+            <div class="card-icon">⚙️</div>
+            <div class="card-title">Options</div>
+          </button>
+          <button class="nav-card" data-page="support">
+            <div class="card-icon">🆘</div>
+            <div class="card-title">Support</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- XP Page -->
+      <div class="page" id="page-xp">
+        <h2 class="page-title">XP Session</h2>
+        <div class="xp-stats">
+          <div class="stat-card">
+            <div class="stat-icon">🧪</div>
+            <div class="stat-content">
+              <div class="stat-label">Session XP</div>
+              <div class="stat-value" id="sessionXP">0</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🪙</div>
+            <div class="stat-content">
+              <div class="stat-label">Coins</div>
+              <div class="stat-value" id="userCoins">0</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🌹</div>
+            <div class="stat-content">
+              <div class="stat-label">Roses</div>
+              <div class="stat-value" id="userRoses">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Misc Page -->
+      <div class="page" id="page-misc">
+        <h2 class="page-title">Miscellaneous</h2>
+
+        <div class="misc-section">
+          <h3 class="section-subtitle">Wheels</h3>
+          <div class="wheel-buttons">
+            <button class="wheel-btn" id="goldWheelBtn" data-available="false">
+              <div class="wheel-icon">🪙</div>
+              <div class="wheel-info">
+                <div class="wheel-name">Gold Wheel</div>
+                <div class="wheel-status" id="goldWheelStatus">Checking...</div>
+              </div>
+            </button>
+            <button class="wheel-btn" id="roseWheelBtn">
+              <div class="wheel-icon">🌹</div>
+              <div class="wheel-info">
+                <div class="wheel-name">Rose Wheel</div>
+                <div class="wheel-status">30 🌹 per spin</div>
+              </div>
+            </button>
+          </div>
+          <div class="wheel-result" id="wheelResult"></div>
+        </div>
+
+        <div class="misc-section">
+          <h3 class="section-subtitle">Player Features</h3>
+          <div class="feature-toggles">
+            <button
+              class="feature-toggle"
+              id="playerAuraToggle"
+              data-enabled="false"
+            >
+              <div class="feature-icon">🍂</div>
+              <div class="feature-info">
+                <div class="feature-name">Player Aura</div>
+                <div class="feature-status">Disabled</div>
+              </div>
+              <div class="feature-indicator"></div>
+            </button>
+            <button
+              class="feature-toggle"
+              id="playerNotesToggle"
+              data-enabled="false"
+            >
+              <div class="feature-icon">📝</div>
+              <div class="feature-info">
+                <div class="feature-name">Player Notes</div>
+                <div class="feature-status">Disabled</div>
+              </div>
+              <div class="feature-indicator"></div>
+            </button>
+          </div>
+        </div>
+
+        <div class="misc-section">
+          <h3 class="section-subtitle">Loot Boxes</h3>
+          <button class="action-btn" id="lootBoxBtn">
+            <span>Open All Boxes</span>
+            <span class="loot-count" id="lootBoxCount">(0 available)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Options Page -->
+      <div class="page" id="page-options">
+        <h2 class="page-title">Options</h2>
+        <div class="options-list">
+          <div class="option-item">
+            <div class="option-info">
+              <div class="option-name">Auto Replay</div>
+              <div class="option-desc">
+                Automatically restart when game ends
+              </div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="autoReplayToggle" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="option-item">
+            <div class="option-info">
+              <div class="option-name">Auto Play</div>
+              <div class="option-desc">Auto play in custom couple games</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="autoPlayToggle" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="option-item">
+            <div class="option-info">
+              <div class="option-name">Show Hidden Level</div>
+              <div class="option-desc">Display other players' levels</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="showHiddenLvlToggle" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="option-item">
+            <div class="option-info">
+              <div class="option-name">Debug Mode</div>
+              <div class="option-desc">Enable console logging</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="debugModeToggle" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Support Page -->
+      <div class="page" id="page-support">
+        <h2 class="page-title">Support</h2>
+        <div class="support-links">
+          <a
+            href="https://discord.gg/3shH83G64y"
+            target="_blank"
+            class="support-link"
+          >
+            <div class="support-icon">🌐</div>
+            <div class="support-info">
+              <div class="support-name">Discord Server</div>
+              <div class="support-desc">Join our community</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="popup.js"></script>
+    <div id="footerNotify" class="footer-notify" aria-live="polite"></div>
+  </body>
+</html>
