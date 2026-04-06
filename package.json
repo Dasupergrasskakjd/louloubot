@@ -1,0 +1,8 @@
+{
+  "name": "louloubot",
+  "version": "1.0.0",
+  "description": "Bot for wolvesville",
+  "devDependencies": {
+    "@types/chrome": "^0.1.39"
+  }
+}
